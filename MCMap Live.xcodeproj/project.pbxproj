@@ -30,6 +30,14 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* mcmap_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* mcmap_macAppDelegate.m */; };
 		55DC5F6F25CD100C0061DE63 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55DC5F6E25CD100C0061DE63 /* Media.xcassets */; };
+		55EEC03625CD5A2200F484D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EEC03525CD5A2200F484D0 /* AppDelegate.swift */; };
+		55EEC03825CD5A2300F484D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EEC03725CD5A2200F484D0 /* Assets.xcassets */; };
+		55EEC03B25CD5A2300F484D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EEC03925CD5A2300F484D0 /* MainMenu.xib */; };
+		55EEC04525CD5B3900F484D0 /* mcmap in CopyFiles */ = {isa = PBXBuildFile; fileRef = 14A9E815125E74900058D2C3 /* mcmap */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55EEC04725CD5B5D00F484D0 /* tiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 146763B1127361FE00C06D3A /* tiles.plist */; };
+		55EEC04925CD5B6000F484D0 /* help in Resources */ = {isa = PBXBuildFile; fileRef = 14CD03531270E94A00ED2060 /* help */; };
+		55EEC04B25CD5B6200F484D0 /* Colors in Resources */ = {isa = PBXBuildFile; fileRef = 1473052E126BC2FF0068F97A /* Colors */; };
+		55EEC04D25CD5B6500F484D0 /* MinecraftBiomeExtractor.jar in Resources */ = {isa = PBXBuildFile; fileRef = 14B1C5EB12892A5A00DBF7EB /* MinecraftBiomeExtractor.jar */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -54,6 +62,16 @@
 			dstSubfolderSpec = 7;
 			files = (
 				14A9E816125E74900058D2C3 /* mcmap in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55EEC04425CD5B2E00F484D0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				55EEC04525CD5B3900F484D0 /* mcmap in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,12 +115,25 @@
 		55DC5F6E25CD100C0061DE63 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		55DC5F7025CD105A0061DE63 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55DC5F7125CD105B0061DE63 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		55EEC03325CD5A2200F484D0 /* MCMap Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MCMap Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55EEC03525CD5A2200F484D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		55EEC03725CD5A2200F484D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		55EEC03A25CD5A2300F484D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		55EEC03C25CD5A2300F484D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55EEC03D25CD5A2300F484D0 /* MCMap_Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MCMap_Swift.entitlements; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* mcmap_mac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "mcmap_mac-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MCMap Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MCMap Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08EB6FB1514604300B64375 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		55EEC03025CD5A2200F484D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* MCMap Live.app */,
+				55EEC03325CD5A2200F484D0 /* MCMap Swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				55EEC02E25CD58BE00F484D0 /* Legacy Cocoa */,
+				55EEC03425CD5A2200F484D0 /* MCMap Swift */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -230,9 +263,39 @@
 			path = "Legacy Cocoa";
 			sourceTree = "<group>";
 		};
+		55EEC03425CD5A2200F484D0 /* MCMap Swift */ = {
+			isa = PBXGroup;
+			children = (
+				55EEC03525CD5A2200F484D0 /* AppDelegate.swift */,
+				55EEC03725CD5A2200F484D0 /* Assets.xcassets */,
+				55EEC03925CD5A2300F484D0 /* MainMenu.xib */,
+				55EEC03C25CD5A2300F484D0 /* Info.plist */,
+				55EEC03D25CD5A2300F484D0 /* MCMap_Swift.entitlements */,
+			);
+			path = "MCMap Swift";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		55EEC03225CD5A2200F484D0 /* MCMap Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55EEC03E25CD5A2300F484D0 /* Build configuration list for PBXNativeTarget "MCMap Swift" */;
+			buildPhases = (
+				55EEC02F25CD5A2200F484D0 /* Sources */,
+				55EEC03025CD5A2200F484D0 /* Frameworks */,
+				55EEC03125CD5A2200F484D0 /* Resources */,
+				55EEC04425CD5B2E00F484D0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MCMap Swift";
+			productName = "MCMap Swift";
+			productReference = 55EEC03325CD5A2200F484D0 /* MCMap Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8D1107260486CEB800E47090 /* MCMap Live */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MCMap Live" */;
@@ -259,7 +322,13 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					55EEC03225CD5A2200F484D0 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MCMap Live" */;
 			compatibilityVersion = "Xcode 3.1";
@@ -271,17 +340,32 @@
 				fr,
 				de,
 				es,
+				Base,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* mcmap-mac */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* MCMap Live */,
+				55EEC03225CD5A2200F484D0 /* MCMap Swift */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		55EEC03125CD5A2200F484D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55EEC03825CD5A2300F484D0 /* Assets.xcassets in Resources */,
+				55EEC04925CD5B6000F484D0 /* help in Resources */,
+				55EEC04D25CD5B6500F484D0 /* MinecraftBiomeExtractor.jar in Resources */,
+				55EEC04B25CD5B6200F484D0 /* Colors in Resources */,
+				55EEC03B25CD5A2300F484D0 /* MainMenu.xib in Resources */,
+				55EEC04725CD5B5D00F484D0 /* tiles.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D1107290486CEB800E47090 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -305,6 +389,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		55EEC02F25CD5A2200F484D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55EEC03625CD5A2200F484D0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -339,9 +431,102 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
+		55EEC03925CD5A2300F484D0 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55EEC03A25CD5A2300F484D0 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		55EEC03F25CD5A2300F484D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MCMap-Live";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "MCMap Swift/MCMap_Swift.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2.0;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "MCMap Swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.MaddTheSane.MCMap-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		55EEC04025CD5A2300F484D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MCMap-Live";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "MCMap Swift/MCMap_Swift.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "MCMap Swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.MaddTheSane.MCMap-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -478,6 +663,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		55EEC03E25CD5A2300F484D0 /* Build configuration list for PBXNativeTarget "MCMap Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55EEC03F25CD5A2300F484D0 /* Debug */,
+				55EEC04025CD5A2300F484D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MCMap Live" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

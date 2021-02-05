@@ -408,6 +408,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="-659" y="-26"/>
         </menu>
         <customObject id="849" customClass="SUUpdater"/>
         <window title="Block Finder Setup" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="905" customClass="NSPanel">
@@ -522,6 +523,7 @@
                     </connections>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="-523" y="80"/>
         </menu>
         <customObject id="985" customClass="BlockFinderPanelController">
             <connections>
@@ -566,7 +568,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="308" minWidth="40" maxWidth="1000" id="1039">
+                                        <tableColumn width="279" minWidth="40" maxWidth="1000" id="1039">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Installed Color Sets">
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
@@ -741,7 +743,7 @@ Gw
             </subviews>
             <point key="canvasLocation" x="-283" y="-472"/>
         </customView>
-        <window title="Map Info" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" visibleAtLaunch="NO" animationBehavior="default" id="1144" customClass="NSPanel">
+        <window title="Map Info" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" visibleAtLaunch="NO" appearanceType="darkAqua" animationBehavior="default" id="1144" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="162" y="372" width="388" height="107"/>
