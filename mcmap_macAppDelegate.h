@@ -7,20 +7,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
-@interface mcmap_macAppDelegate : NSObject {
-#else
-@interface mcmap_macAppDelegate : NSObject <NSApplicationDelegate> {
-#endif
-
-    
+@interface mcmap_macAppDelegate : NSObject <NSApplicationDelegate, NSFileManagerDelegate>
+{
     NSWindow* window;
 }
 
 - (void)windowWillClose:(NSNotification *)aNotification;
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification;
-- (void)applicationWillTerminate:(NSNotification *)aNotification;
-- (BOOL)fileManager:(NSFileManager *)fm shouldProceedAfterError:(NSError *)error copyingItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath;
 
 @property (assign) IBOutlet NSWindow *window;
 

@@ -3,9 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleDocumentTypes</key>
-	<array/>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleHelpBookFolder</key>
@@ -23,13 +21,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6.2</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array/>
 	<key>CFBundleVersion</key>
-	<string>1.6.2</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.entertainment</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSExportableTypes</key>
@@ -44,8 +42,6 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSServices</key>
-	<array/>
 	<key>SUAllowsAutomaticUpdates</key>
 	<true/>
 	<key>SUFeedURL</key>
@@ -54,9 +50,5 @@
 	<string>dsa_pub.pem</string>
 	<key>SUScheduledCheckInterval</key>
 	<integer>43200</integer>
-	<key>UTExportedTypeDeclarations</key>
-	<array/>
-	<key>UTImportedTypeDeclarations</key>
-	<array/>
 </dict>
 </plist>

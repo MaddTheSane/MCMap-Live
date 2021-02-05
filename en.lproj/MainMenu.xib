@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="494" id="495"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject">
+            <connections>
+                <outlet property="delegate" destination="494" id="1174"/>
+            </connections>
+        </customObject>
+        <window title="MCMap Live" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="0.0" y="358" width="800" height="520"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="372">
+                <rect key="frame" x="0.0" y="0.0" width="800" height="527"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <openGLView wantsLayer="YES" focusRingType="none" useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" translatesAutoresizingMaskIntoConstraints="NO" id="533" customClass="MCMapOpenGLView">
+                        <rect key="frame" x="0.0" y="27" width="800" height="500"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="800" placeholder="YES" id="hjr-CL-MOX"/>
+                            <constraint firstAttribute="height" constant="500" placeholder="YES" id="jg2-kT-zsb"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="blockFinderPanel" destination="905" id="946"/>
+                            <outlet property="blockFinderPopup" destination="942" id="947"/>
+                            <outlet property="caveMenuItem" destination="832" id="834"/>
+                            <outlet property="colorsMenu" destination="857" id="859"/>
+                            <outlet property="dayMenuItem" destination="799" id="860"/>
+                            <outlet property="deleteBiomeDataMenuItem" destination="1136" id="1142"/>
+                            <outlet property="depthIndicator" destination="1108" id="1111"/>
+                            <outlet property="depthSlider" destination="894" id="898"/>
+                            <outlet property="endMenuItem" destination="1175" id="1177"/>
+                            <outlet property="hideWaterMenuItem" destination="1180" id="1181"/>
+                            <outlet property="imageFormat" destination="1118" id="1131"/>
+                            <outlet property="imageFormatPopup" destination="1119" id="1129"/>
+                            <outlet property="mystCraftAgesMenuItem" destination="1183" id="1186"/>
+                            <outlet property="neUpMenuItem" destination="840" id="847"/>
+                            <outlet property="netherMenuItem" destination="1113" id="1114"/>
+                            <outlet property="nightMenuItem" destination="798" id="822"/>
+                            <outlet property="noise0menuItem" destination="869" id="873"/>
+                            <outlet property="noise10menuItem" destination="872" id="875"/>
+                            <outlet property="noise15menuItem" destination="870" id="876"/>
+                            <outlet property="noise20menuItem" destination="877" id="878"/>
+                            <outlet property="noise5menuItem" destination="871" id="874"/>
+                            <outlet property="nwUpMenuItem" destination="839" id="848"/>
+                            <outlet property="resetViewMenuItem" destination="796" id="823"/>
+                            <outlet property="saveChunkMenuItem" destination="672" id="828"/>
+                            <outlet property="saveWorldMenuItem" destination="671" id="829"/>
+                            <outlet property="seUpMenuItem" destination="837" id="846"/>
+                            <outlet property="showBiomesMenuItem" destination="1138" id="1143"/>
+                            <outlet property="statusTextField" destination="891" id="893"/>
+                            <outlet property="swUpMenuItem" destination="838" id="845"/>
+                            <outlet property="torchlightMenuItem" destination="861" id="862"/>
+                            <outlet property="uniformMenuItem" destination="795" id="820"/>
+                            <outlet property="worldsMenu" destination="784" id="1167"/>
+                        </connections>
+                    </openGLView>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="891">
+                        <rect key="frame" x="17" y="2" width="382" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" id="892">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="894">
+                        <rect key="frame" x="497" y="-1" width="256" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="252" id="ry4-QA-LpE"/>
+                        </constraints>
+                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="256" doubleValue="256" tickMarkPosition="above" sliderType="linear" id="895">
+                            <connections>
+                                <action selector="setHeight:" target="533" id="897"/>
+                            </connections>
+                        </sliderCell>
+                    </slider>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1108">
+                        <rect key="frame" x="754" y="7" width="29" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="w8k-hB-svn"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="256" id="1109">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="894" secondAttribute="bottom" constant="5" id="Nig-CP-u1V"/>
+                    <constraint firstItem="533" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="QiG-hN-HFB"/>
+                    <constraint firstAttribute="trailing" secondItem="533" secondAttribute="trailing" id="ZOr-aK-xQz"/>
+                    <constraint firstItem="1108" firstAttribute="centerY" secondItem="894" secondAttribute="centerY" id="cdT-7i-9DV"/>
+                    <constraint firstItem="1108" firstAttribute="leading" secondItem="894" secondAttribute="trailing" constant="5" id="ehL-J0-BYu"/>
+                    <constraint firstItem="894" firstAttribute="top" secondItem="533" secondAttribute="bottom" constant="2" id="ig2-Ev-Uum"/>
+                    <constraint firstAttribute="trailing" secondItem="1108" secondAttribute="trailing" constant="19" id="mOj-49-Jqp"/>
+                    <constraint firstItem="533" firstAttribute="top" secondItem="372" secondAttribute="top" id="zyX-5w-eyt"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="14" y="125"/>
+        </window>
+        <customObject id="494" customClass="mcmap_macAppDelegate"/>
+        <customObject id="420" customClass="NSFontManager"/>
+        <menu title="Main Menu" systemMenu="main" id="633">
+            <items>
+                <menuItem title="MCMap Live" id="639">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="MCMap Live" systemMenu="apple" autoenablesItems="NO" id="646">
+                        <items>
+                            <menuItem title="About MCMap Live" id="657">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="orderFrontStandardAboutPanel:" target="-2" id="786"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Check for Update..." id="850">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="849" id="851"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="650"/>
+                            <menuItem title="Preferences…" keyEquivalent="," id="652">
+                                <connections>
+                                    <action selector="showWindow:" target="1029" id="1069"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="651"/>
+                            <menuItem title="Services" id="649">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Services" systemMenu="services" id="658"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="653"/>
+                            <menuItem title="Hide MCMap Live" keyEquivalent="h" id="656">
+                                <connections>
+                                    <action selector="hide:" target="-2" id="790"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Others" keyEquivalent="h" id="647">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="hideOtherApplications:" target="-2" id="789"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show All" id="655">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="arrangeInFront:" target="-2" id="788"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="648"/>
+                            <menuItem title="Quit MCMap Live" keyEquivalent="q" id="654">
+                                <connections>
+                                    <action selector="terminate:" target="-2" id="787"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="File" id="637">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="File" autoenablesItems="NO" id="661">
+                        <items>
+                            <menuItem title="Open World" id="783">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Open World" autoenablesItems="NO" id="784"/>
+                            </menuItem>
+                            <menuItem title="Open World Folder…" keyEquivalent="o" id="669">
+                                <connections>
+                                    <action selector="openWorldFolder:" target="533" id="809"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="664"/>
+                            <menuItem title="Save Current Area" enabled="NO" keyEquivalent="s" id="672">
+                                <connections>
+                                    <action selector="saveChunk:" target="533" id="826"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save Entire World" enabled="NO" keyEquivalent="S" id="671">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="saveWorld:" target="533" id="827"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Options" id="635">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Options" autoenablesItems="NO" id="678">
+                        <items>
+                            <menuItem title="The Nether" id="1113">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setDimensionToNether:" target="533" id="1178"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="The End" id="1175">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setDimensionToEnd:" target="533" id="1179"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="MystCraft Ages" enabled="NO" id="1183">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="MystCraft Ages" id="1184"/>
+                            </menuItem>
+                            <menuItem title="Render Mode" id="793">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Render Mode" id="794">
+                                    <items>
+                                        <menuItem title="Uniform" state="on" id="795">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setLightingMode:" target="533" id="810"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Day" id="799">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setLightingMode:" target="533" id="811"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Night" id="798">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setLightingMode:" target="533" id="812"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Torchlight" id="861">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setLightingMode:" target="533" id="863"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Cave" id="832">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setLightingMode:" target="533" id="833"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Orientation" id="835">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Orientation" id="836">
+                                    <items>
+                                        <menuItem title="Northeast Up" state="on" id="837">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setOrientation:" target="533" id="841"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Northwest Up" id="840">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setOrientation:" target="533" id="844"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Southwest Up" id="839">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setOrientation:" target="533" id="843"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Southeast Up" id="838">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setOrientation:" target="533" id="842"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Colors" id="856">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Colors" id="857"/>
+                            </menuItem>
+                            <menuItem title="Noise" id="867">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Noise" id="868">
+                                    <items>
+                                        <menuItem title="None" state="on" id="869">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setNoiseLevel:" target="533" id="879"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Light" id="871">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setNoiseLevel:" target="533" id="880"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Moderate" id="872">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setNoiseLevel:" target="533" id="881"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Strong" id="870">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setNoiseLevel:" target="533" id="882"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Very Strong" id="877">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="setNoiseLevel:" target="533" id="883"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Hide Water" id="1180">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleHideWater:" target="533" id="1182"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reset View" keyEquivalent="t" id="796">
+                                <connections>
+                                    <action selector="resetView:" target="533" id="814"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Flush Cache" keyEquivalent="r" id="830">
+                                <connections>
+                                    <action selector="flushCache:" target="533" id="831"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Biomes" id="1133">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Biomes" id="1134">
+                        <items>
+                            <menuItem title="Use Biome-Specific Colors" id="1138">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setUseBiomes:" target="533" id="1139"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Update Biome Data" id="1135">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="generateBiomes:" target="533" id="1140"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete Biome Data" id="1136">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="deleteBiomes:" target="533" id="1141"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Tools" id="888">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Tools" id="889">
+                        <items>
+                            <menuItem title="Find Blocks..." keyEquivalent="f" id="903">
+                                <connections>
+                                    <action selector="showWindow:" target="985" id="986"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Extract PNG Colors..." id="864">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="createColorsTxt:" target="533" id="866"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save Slice Sequence..." id="930">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="saveSliceSequence:" target="533" id="931"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Help" id="899">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Help" systemMenu="help" id="900">
+                        <items>
+                            <menuItem title="MCMap Live Help" keyEquivalent="?" id="901">
+                                <connections>
+                                    <action selector="showHelp:" target="-1" id="902"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+            </items>
+        </menu>
+        <customObject id="849" customClass="SUUpdater"/>
+        <window title="Block Finder Setup" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="905" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="810" y="752" width="282" height="126"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="906">
+                <rect key="frame" x="0.0" y="0.0" width="282" height="126"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="914">
+                        <rect key="frame" x="209" y="11" width="60" height="32"/>
+                        <buttonCell key="cell" type="push" title="Find" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" inset="2" id="915">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="startBlockFinder:" target="985" id="1001"/>
+                        </connections>
+                    </button>
+                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1007">
+                        <rect key="frame" x="17" y="82" width="249" height="25"/>
+                        <popUpButtonCell key="cell" type="push" title="Select Block Types" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="1010" id="1008">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" title="OtherViews" id="1009">
+                                <items>
+                                    <menuItem title="Select Block Types" hidden="YES" id="1010"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1015">
+                        <rect key="frame" x="18" y="27" width="41" height="16"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Color:" id="1016">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1093">
+                        <rect key="frame" x="66" y="52" width="157" height="28"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="1094"/>
+                        <connections>
+                            <action selector="takeDoubleValueFrom:" target="1101" id="1106"/>
+                        </connections>
+                    </slider>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1095">
+                        <rect key="frame" x="18" y="60" width="45" height="16"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="X-Ray:" id="1096">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1101">
+                        <rect key="frame" x="226" y="60" width="38" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="5lE-Ic-RzZ"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="0%" id="1102">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="percent" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="1104">
+                                <integer key="multiplier" value="100"/>
+                            </numberFormatter>
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="960">
+                        <rect key="frame" x="65" y="20" width="23" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="23" id="VGd-tE-LpT"/>
+                            <constraint firstAttribute="height" constant="23" id="u8n-Jv-htn"/>
+                        </constraints>
+                        <color key="color" red="1" green="0.011788656139999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </colorWell>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="960" firstAttribute="leading" secondItem="1015" secondAttribute="trailing" constant="8" symbolic="YES" id="1GY-gN-R9g"/>
+                    <constraint firstItem="960" firstAttribute="top" secondItem="1093" secondAttribute="bottom" constant="15" id="4Af-BC-ekc"/>
+                    <constraint firstItem="1015" firstAttribute="leading" secondItem="906" secondAttribute="leading" constant="20" symbolic="YES" id="5Ia-Hy-5HF"/>
+                    <constraint firstAttribute="trailing" secondItem="914" secondAttribute="trailing" constant="20" symbolic="YES" id="5LP-aZ-t7i"/>
+                    <constraint firstItem="1095" firstAttribute="leading" secondItem="906" secondAttribute="leading" constant="20" symbolic="YES" id="EJC-jc-ktX"/>
+                    <constraint firstItem="1093" firstAttribute="centerY" secondItem="1095" secondAttribute="centerY" id="GiL-7X-m2A"/>
+                    <constraint firstItem="1093" firstAttribute="leading" secondItem="1095" secondAttribute="trailing" constant="7" id="P7V-Xs-QHd"/>
+                    <constraint firstItem="914" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="960" secondAttribute="trailing" constant="8" symbolic="YES" id="RGi-7q-s8t"/>
+                    <constraint firstAttribute="trailing" secondItem="1101" secondAttribute="trailing" constant="20" symbolic="YES" id="UEw-ug-i6w"/>
+                    <constraint firstAttribute="bottom" secondItem="960" secondAttribute="bottom" constant="20" symbolic="YES" id="W5S-KR-Vvt"/>
+                    <constraint firstItem="1101" firstAttribute="firstBaseline" secondItem="1095" secondAttribute="firstBaseline" id="ZqG-2H-UPc"/>
+                    <constraint firstItem="1007" firstAttribute="top" secondItem="906" secondAttribute="top" constant="20" symbolic="YES" id="fkq-B8-OAM"/>
+                    <constraint firstItem="1101" firstAttribute="leading" secondItem="1093" secondAttribute="trailing" constant="7" id="g1D-Mw-Z6f"/>
+                    <constraint firstItem="1007" firstAttribute="leading" secondItem="906" secondAttribute="leading" constant="20" symbolic="YES" id="g2V-fo-bLi"/>
+                    <constraint firstItem="914" firstAttribute="top" secondItem="1093" secondAttribute="bottom" constant="20" symbolic="YES" id="kDj-hc-1ZL"/>
+                    <constraint firstItem="1007" firstAttribute="centerX" secondItem="906" secondAttribute="centerX" id="mXr-W0-b0S"/>
+                    <constraint firstItem="1093" firstAttribute="top" secondItem="1007" secondAttribute="bottom" constant="8" symbolic="YES" id="ti9-lc-HhE"/>
+                    <constraint firstItem="960" firstAttribute="top" secondItem="1015" secondAttribute="top" id="zfQ-Gu-dmH"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="14" y="545"/>
+        </window>
+        <menu title="Blocks To Find" id="942">
+            <items>
+                <menuItem title="Select Blocks" id="1014">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="- Select None -" id="1002">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="selectBlock:" target="985" id="1004"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
+        <customObject id="985" customClass="BlockFinderPanelController">
+            <connections>
+                <outlet property="blockFinderMenu" destination="942" id="998"/>
+                <outlet property="blockSelector" destination="1007" id="1013"/>
+                <outlet property="finderColor" destination="960" id="999"/>
+                <outlet property="mapview" destination="533" id="1000"/>
+                <outlet property="selectNoneMenuItem" destination="1002" id="1003"/>
+                <outlet property="window" destination="905" id="987"/>
+                <outlet property="xraySlider" destination="1093" id="1107"/>
+            </connections>
+        </customObject>
+        <customObject id="1029" customClass="MCMapPrefsController">
+            <connections>
+                <outlet property="colorsTable" destination="1036" id="1073"/>
+                <outlet property="mapview" destination="533" id="1030"/>
+                <outlet property="numberOfRenderers" destination="1047" id="1078"/>
+                <outlet property="numberOfRenderersStepper" destination="1043" id="1079"/>
+                <outlet property="window" destination="1031" id="1070"/>
+            </connections>
+        </customObject>
+        <window title="MCMap Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="1031">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="248" y="490" width="362" height="267"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="1032">
+                <rect key="frame" x="0.0" y="0.0" width="362" height="267"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1033">
+                        <rect key="frame" x="20" y="51" width="322" height="135"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <clipView key="contentView" id="VWE-N0-q5z">
+                            <rect key="frame" x="1" y="1" width="320" height="133"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="1037" id="1036">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn width="308" minWidth="40" maxWidth="1000" id="1039">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Installed Color Sets">
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="1040">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
+                                        </tableColumn>
+                                    </tableColumns>
+                                    <connections>
+                                        <outlet property="dataSource" destination="1029" id="1074"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1035">
+                            <rect key="frame" x="1" y="119" width="223" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1034">
+                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <tableHeaderView key="headerView" wantsLayer="YES" id="1037">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </tableHeaderView>
+                    </scrollView>
+                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1043">
+                        <rect key="frame" x="180" y="197" width="19" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="64" doubleValue="4" id="1044"/>
+                        <connections>
+                            <action selector="setMaxRenderers:" target="1029" id="1086"/>
+                        </connections>
+                    </stepper>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1045">
+                        <rect key="frame" x="17" y="202" width="140" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Rendering Threads:" id="1046">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1047">
+                        <rect key="frame" x="150" y="200" width="25" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" title="4" drawsBackground="YES" id="1048">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1055">
+                        <rect key="frame" x="20" y="19" width="22" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1056">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="addColor:" target="1029" id="1076"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1057">
+                        <rect key="frame" x="41" y="19" width="22" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1058">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="removeColor:" target="1029" id="1077"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1059">
+                        <rect key="frame" x="207" y="219" width="59" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1060">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="setRenderSettings:" target="1029" id="1071"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1061">
+                        <rect key="frame" x="260" y="219" width="88" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Restore" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1062">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="defaultRenderSettings:" target="1029" id="1072"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1063">
+                        <rect key="frame" x="17" y="230" width="177" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default Rendering Settings:" id="1064">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1067">
+                        <rect key="frame" x="208" y="202" width="137" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default: 4" id="1068">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1090">
+                        <rect key="frame" x="62" y="21" width="285" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="recessed" title="~/Library/Application Support/MCMap Live" bezelStyle="recessed" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1091">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="systemBold" size="12"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="showColorsInFinder:" target="1029" id="1092"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="1029" id="1075"/>
+            </connections>
+            <point key="canvasLocation" x="-418" y="-722"/>
+        </window>
+        <customView id="1118">
+            <rect key="frame" x="0.0" y="0.0" width="316" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1119">
+                    <rect key="frame" x="72" y="16" width="227" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" title="Portable Network Graphics" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1122" id="1120">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="1121">
+                            <items>
+                                <menuItem title="Portable Network Graphics" state="on" id="1122">
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="changeSaveFormat:" target="533" id="1132"/>
+                    </connections>
+                </popUpButton>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1125">
+                    <rect key="frame" x="17" y="22" width="53" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Format:" id="1126">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="-283" y="-472"/>
+        </customView>
+        <window title="Map Info" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" visibleAtLaunch="NO" animationBehavior="default" id="1144" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES" HUD="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="162" y="372" width="388" height="107"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="1145">
+                <rect key="frame" x="0.0" y="0.0" width="388" height="107"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1146">
+                        <rect key="frame" x="17" y="70" width="109" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Chunk Location:" id="1147">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1148">
+                        <rect key="frame" x="17" y="45" width="109" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Elevation:" id="1149">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1154">
+                        <rect key="frame" x="17" y="20" width="109" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Random Seed:" id="1155">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1156">
+                        <rect key="frame" x="139" y="70" width="96" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="( 34 , -52 )" id="1157">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1152">
+                        <rect key="frame" x="262" y="70" width="109" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Show Crosshairs" id="1153">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1150">
+                        <rect key="frame" x="238" y="62" width="22" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="1151">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1158">
+                        <rect key="frame" x="139" y="45" width="68" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0" id="1159">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1162">
+                        <rect key="frame" x="139" y="20" width="68" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0" id="1163">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="1164" id="1165"/>
+            </connections>
+            <point key="canvasLocation" x="-148" y="-301"/>
+        </window>
+        <customObject id="1164" customClass="MapInfoPanelController">
+            <connections>
+                <outlet property="window" destination="1144" id="1166"/>
+            </connections>
+        </customObject>
+    </objects>
+    <resources>
+        <image name="NSAddTemplate" width="14" height="13"/>
+        <image name="NSRemoveTemplate" width="14" height="4"/>
+    </resources>
+</document>

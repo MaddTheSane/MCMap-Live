@@ -92,7 +92,7 @@ NSString* MapChunk::getFilename()
 bool MapChunk::loadTextureFromDisk(int minLOD, int maxLOD)
 {
     NSBitmapImageRep *theImage;
-    int width, height, dest_width, dest_height, bytesPRow;
+    NSInteger width, height, dest_width, dest_height, bytesPRow;
     unsigned char *fixedImageData;
     
     // Load the image into an NSBitmapImageRep
@@ -169,7 +169,7 @@ bool MapChunk::loadTextureFromDisk(int minLOD, int maxLOD)
                     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                    glTexImage2D(GL_TEXTURE_2D, 0, 4, dest_width, dest_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, fixedImageData);
+                    glTexImage2D(GL_TEXTURE_2D, 0, 4, (GLsizei)dest_width, (GLsizei)dest_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, fixedImageData);
                 }
                 // Release the stuff we allocated
                 CGContextRelease(myBitmapContext);

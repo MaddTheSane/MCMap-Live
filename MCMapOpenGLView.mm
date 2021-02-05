@@ -14,9 +14,9 @@
 
 typedef enum RenderLightingModes {UNIFORM, DAY, NIGHT, TORCHLIGHT, CAVE} LightingMode;
 
-static NSString *OVERWORLD_DIMENSION_PATH = @"region";
-static NSString *END_DIMENSION_PATH = @"DIM1/region";
-static NSString *NETHER_DIMENSION_PATH = @"DIM-1/region";
+static NSString *const OVERWORLD_DIMENSION_PATH = @"region";
+static NSString *const END_DIMENSION_PATH = @"DIM1/region";
+static NSString *const NETHER_DIMENSION_PATH = @"DIM-1/region";
 
 recVec gOrigin = {0.0, 0.0, 0.0};
 
@@ -1416,7 +1416,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         {
             maxdepth = newdepth;
             NSLog(@"Stop 1\n");
-            [depthIndicator setTitleWithMnemonic: [NSString stringWithFormat: @"%i",maxdepth]];
+            [depthIndicator setStringValue: [NSString stringWithFormat: @"%i",maxdepth]];
             NSLog(@"Stop 2\n");
             [self setupMapChunk];
             NSLog(@"Stop 3\n");
@@ -1773,6 +1773,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
 // called after context is created
 - (void) prepareOpenGL
 {
+	[super prepareOpenGL];
     GLint swapInt = 1;
     [[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSwapInterval]; // set to vbl sync
 
@@ -1798,13 +1799,13 @@ static void screen2blockf(float x, float y, float* boxCoords)
     
     NSString* rt_path = [ NSString stringWithFormat:@"%@/%s",[ [ NSBundle mainBundle ] resourcePath ],"rendering.png" ];
     renderingTexture = loadTexture(rt_path);
-    rt_path = [ NSString stringWithFormat:@"%@/%s",[ [ NSBundle mainBundle ] resourcePath ],"begin.png" ];
+    rt_path = [NSBundle.mainBundle URLForImageResource:@"begin"].path;
     beginTexture = loadTexture(rt_path);
-    rt_path = [ NSString stringWithFormat:@"%@/%s",[ [ NSBundle mainBundle ] resourcePath ],"rendering_selection.png" ];
+    rt_path = [NSBundle.mainBundle URLForImageResource:@"rendering_selection"].path;
     saveChunkTexture = loadTexture(rt_path);
-    rt_path = [ NSString stringWithFormat:@"%@/%s",[ [ NSBundle mainBundle ] resourcePath ],"rendering_world.png" ];
+    rt_path = [NSBundle.mainBundle URLForImageResource:@"rendering_world"].path;
     saveWorldTexture = loadTexture(rt_path);
-    rt_path = [ NSString stringWithFormat:@"%@/%s",[ [ NSBundle mainBundle ] resourcePath ],"extracting_biome.png" ];
+    rt_path = [NSBundle.mainBundle URLForImageResource:@"extracting_biome"].path;
     biomeExtractTexture = loadTexture(rt_path);
     
     [self setupMapChunk];
@@ -1863,9 +1864,9 @@ static void screen2blockf(float x, float y, float* boxCoords)
 
     if ([panel runModal] == NSOKButton)
     {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/level.dat",[panel filename]] isDirectory:nil])
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[[panel URL].path stringByAppendingPathComponent:@"level.dat"] isDirectory:nil])
         {
-            current_world_path = [[panel filename] retain];
+            current_world_path = [[panel URL].path copy];
             
             if (worldLoaded)
                 [self resetForNewWorld: NO];
@@ -1945,7 +1946,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
 - (BOOL) createColorArrayFromPng:(NSString*)loadpath colorArray:(MinecraftColors*)colors
 {
     NSBitmapImageRep *theImage;
-    int width, height, bytesPRow;
+    NSInteger width, height, bytesPRow;
     unsigned char *fixedImageData;
     
     // Load the image into an NSBitmapImageRep
@@ -1979,7 +1980,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
             CGContextDrawImage(myBitmapContext, CGRectMake(0,0, width, height), image);
             
             
-            int result = NSRunAlertPanel (@"Minecraft Compatibility Note",
+            NSInteger result = NSRunAlertPanel (@"Minecraft Compatibility Note",
                     @"Newer texture packs include gray grass and trees to allow biome-specific coloring. Press Fix Colors if you want these changed to green. Press Keep Gray if you plan on using biome coloring (or you are importing an old texture pack with green grass).",
                     @"Fix Colors",
                     @"Keep Gray", nil  );
@@ -2109,8 +2110,8 @@ static void screen2blockf(float x, float y, float* boxCoords)
                 
                 if ([regioncomponents count]==4)
                 {
-                    int valX = [[regioncomponents objectAtIndex:1] integerValue]*32;
-                    int valZ = [[regioncomponents objectAtIndex:2] integerValue]*32;
+                    NSInteger valX = [[regioncomponents objectAtIndex:1] integerValue]*32;
+                    NSInteger valZ = [[regioncomponents objectAtIndex:2] integerValue]*32;
                     
                     for (int i=int(floor(float(valX)/8.0f)); i<int(floor(float(valX)/8.0f))+8; i++)
                     {
@@ -2234,7 +2235,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
     
     // First, find out what block the camera is looking at in or=1 coords
     float bp[2];
-    float ax,ay,bx,by;
+    float ax,ay,bx=0,by=0;
     screen2blockf(camera.viewPos.x,camera.viewPos.y,bp);
     bp[0] = bp[0];
     bp[1] = bp[1];
@@ -2483,7 +2484,7 @@ if (!processing){
         processing = YES;
         saveChunk = YES;
         
-        [self saveChunkRange:[panel filename] minx:minx maxx:maxx miny:miny maxy:maxy];        
+        [self saveChunkRange:[panel URL].path minx:minx maxx:maxx miny:miny maxy:maxy];
     }
 }
 }
@@ -2503,7 +2504,7 @@ if (!processing){
         if (saveSliceSequence && maxdepth < 256)
         {
             maxdepth++;
-            [statusTextField setTitleWithMnemonic: [NSString stringWithFormat: @"&Saving Slice %i of 256",maxdepth]];
+            [statusTextField setStringValue: [NSString stringWithFormat: @"Saving Slice %i of 256",maxdepth]];
             [self setupMapChunk];
             [self saveChunkRange:[NSString stringWithFormat:@"%@_%i.png",slice_basename,maxdepth] minx:slice_minx maxx:slice_maxx miny:slice_miny maxy:slice_maxy];
         }

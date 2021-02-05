@@ -15,13 +15,13 @@
 #import <list>
 #import <set>
 
-typedef struct {
+typedef struct recVec {
    GLdouble x,y,z;
 } recVec;
 
-typedef struct { int c[MINECRAFT_TILE_COUNT][5]; } MinecraftColors;
+typedef struct MinecraftColors { int c[MINECRAFT_TILE_COUNT][5]; } MinecraftColors;
 
-typedef struct {
+typedef struct recCamera {
 	recVec viewPos; // View position
 	GLint viewWidth, viewHeight; // current window/screen height and width
 } recCamera;
