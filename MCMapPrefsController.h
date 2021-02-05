@@ -8,7 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import "MCMapOpenGLView.h"
 
-@interface MCMapPrefsController : NSWindowController {
+@interface MCMapPrefsController : NSWindowController <NSTableViewDataSource> {
     
     IBOutlet MCMapOpenGLView * mapview;
     IBOutlet NSTableView * colorsTable;
@@ -26,15 +26,5 @@
 - (IBAction) removeColor:(id)sender;
 - (void) windowWillClose:(NSNotification *)notification;
 - (void) windowDidBecomeKey:(NSNotification *)notification; 
-
-// These are so it can act as a data source
-- (id)tableView:(NSTableView *)aTableView
-    objectValueForTableColumn:(NSTableColumn *)aTableColumn
-    row:(NSInteger)rowIndex;
-- (void)tableView:(NSTableView *)aTableView
-    setObjectValue:anObject
-    forTableColumn:(NSTableColumn *)aTableColumn
-    row:(NSInteger)rowIndex;
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView;
 
 @end

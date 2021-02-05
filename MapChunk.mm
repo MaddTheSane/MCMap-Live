@@ -6,6 +6,7 @@
  *
  */
 
+#import <Cocoa/Cocoa.h>
 #include "MapChunk.h"
 
 GLuint MapChunk::loadingTexture; // The OpenGL id of the texture for that wireframe block.

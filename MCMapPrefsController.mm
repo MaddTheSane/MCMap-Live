@@ -37,13 +37,13 @@ NSMutableArray* user_colors;
     [user_colors removeAllObjects];
     // Fill the colors listbox.
     NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
-    NSDirectoryEnumerator* en = [fm enumeratorAtPath:[@"~/Library/Application Support/MCMap Live/" stringByExpandingTildeInPath]];    
+    NSDirectoryEnumerator<NSString *>* en = [fm enumeratorAtPath:[@"~/Library/Application Support/MCMap Live/" stringByExpandingTildeInPath]];    
     NSError* err = nil;
     NSString* file;
-    while (file = [en nextObject]) {
-        if([file hasSuffix:@".txt"])
+    for (file in en) {
+        if([file.pathExtension caseInsensitiveCompare:@"txt"] == NSOrderedSame)
         {
-            [user_colors addObject:[[file substringToIndex:[file length] - 4]copy] ];
+            [user_colors addObject:[file stringByDeletingPathExtension]];
         }
         
         if (err) {
@@ -73,17 +73,17 @@ NSMutableArray* user_colors;
     [panel setAllowsMultipleSelection:NO];
     [panel setPrompt:@"Add Color Set"];
 
-    if ([panel runModal] == NSOKButton)
+    if ([panel runModal] == NSModalResponseOK)
     {
         if ([[panel filename] hasSuffix: @".txt"])
         {
             // Copy the file
-            [[NSFileManager defaultManager] copyItemAtPath:[panel filename] toPath:savepath error:nil];
+            [[NSFileManager defaultManager] copyItemAtURL:[panel URL] toURL:[NSURL fileURLWithPath:savepath] error:nil];
         }
         else if ([[panel filename] hasSuffix: @".png"])
         {
             MinecraftColors colors;
-            if([mapview createColorArrayFromPng:[panel filename] colorArray:&colors])
+            if([mapview createColorArrayFromPng:[panel URL].path colorArray:&colors])
             {
                 [mapview writeColorsFromArray:&colors savePath:savepath];
             }
@@ -118,8 +118,8 @@ NSMutableArray* user_colors;
 // DATA SOURCE METHODS FOR THE TABLE
 
 - (id)tableView:(NSTableView *)aTableView
-    objectValueForTableColumn:(NSTableColumn *)aTableColumn
-    row:(NSInteger)rowIndex
+objectValueForTableColumn:(NSTableColumn *)aTableColumn
+            row:(NSInteger)rowIndex
 {
     if (rowIndex >= 0 && rowIndex < [user_colors count])
         return [user_colors objectAtIndex:rowIndex];
@@ -128,9 +128,9 @@ NSMutableArray* user_colors;
 }
 
 - (void)tableView:(NSTableView *)aTableView
-    setObjectValue:anObject
-    forTableColumn:(NSTableColumn *)aTableColumn
-    row:(NSInteger)rowIndex
+   setObjectValue:(nullable id)anObject
+   forTableColumn:(nullable NSTableColumn *)tableColumn
+              row:(NSInteger)rowIndex
 {
     NSParameterAssert(rowIndex >= 0 && rowIndex < [user_colors count]);
     

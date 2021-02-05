@@ -10,9 +10,9 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <OpenGL/glext.h>
-#import <ApplicationServices/ApplicationServices.h>
+#include <ApplicationServices/ApplicationServices.h>
 
-class MapChunk
+class MapChunk final
 {
     private:
         static GLuint loadingTexture; // The OpenGL id of the texture for that wireframe block.

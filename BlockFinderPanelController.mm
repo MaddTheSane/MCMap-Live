@@ -60,7 +60,7 @@ BOOL color_stored = NO;
 - (void)awakeFromNib
 {
     // Load up the dictionary of minecraft block names and IDs
-    minecraft_blocks = [[NSDictionary dictionaryWithContentsOfFile:[ NSString stringWithFormat:@"%@/tiles.plist",[ [ NSBundle mainBundle ] resourcePath ]]] retain] ;
+    minecraft_blocks = [[NSDictionary dictionaryWithContentsOfFile:[NSBundle.mainBundle pathForResource:@"tiles" ofType:@"plist"]] copy];
     // Populate the Blockfinder Menu
     
     [blockSelector setAutoenablesItems:NO];

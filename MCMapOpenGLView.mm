@@ -9,6 +9,7 @@
 #import "MCMapOpenGLView.h"
 #include "MapChunk.h"
 #include "extractcolors.h"
+#include <algorithm>
 
 // ==================================
 
@@ -113,19 +114,9 @@ float gErrorTime;
 
 static CFAbsoluteTime gStartTime = 0.0f;
 
-static int max(int a, int b)
-{
-    if (a > b)
-        return a;
-    return b;
-}
+using std::max;
 
-static int min(int a, int b)
-{
-    if (a < b)
-        return a;
-    return b;
-}
+using std::min;
 
 // set app start time
 static void setStartTime (void)
@@ -179,7 +170,7 @@ GLenum glReportError (void)
 GLuint loadTexture(NSString* filepath)
 {
     NSBitmapImageRep *theImage;
-    int width, height, bytesPRow;
+    NSInteger width, height, bytesPRow;
     unsigned char *fixedImageData;
     
     // Load the image into an NSBitmapImageRep
@@ -230,7 +221,7 @@ GLuint loadTexture(NSString* filepath)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_LOD, 0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LOD, 4);
         glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width,height, 0, GL_RGBA, GL_UNSIGNED_BYTE, fixedImageData);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)width, (GLsizei)height, 0, GL_RGBA, GL_UNSIGNED_BYTE, fixedImageData);
         
         // Release all the stuff we allocated
         CGContextRelease(myBitmapContext);
@@ -285,7 +276,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         NSOpenGLPFAWindow,
         NSOpenGLPFADoubleBuffer,	// double buffered
         //NSOpenGLPFADepthSize, (NSOpenGLPixelFormatAttribute)16, // 16 bit depth buffer
-        (NSOpenGLPixelFormatAttribute)nil
+        (NSOpenGLPixelFormatAttribute)0
     };
     return [[[NSOpenGLPixelFormat alloc] initWithAttributes:attributes] autorelease];
 }
@@ -963,7 +954,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
             }
             else if (mcexists)
             {
-                int result = NSRunAlertPanel (@"Biome Extraction Notice",
+                NSInteger result = NSRunAlertPanel (@"Biome Extraction Notice",
                     @"This world has no saved biome data. Would you like to extract it?\n\nNOTE: This feature is experimental. It may break with a Minecraft update.\n\nAt the moment, it works best with the Default Colors.\n\nIf your world expands, you will need to select Update Biome Data from the Tools menu.",
                     @"Generate Biome Data",
                     @"Cancel", nil  );
@@ -1073,7 +1064,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         if (!mcexists)
         {
             NSRunAlertPanel (   @"Biome Extraction Notice",
-                                @"Biome rendering requires singleplayer minecraft is installed.",
+                                @"Biome rendering requires singleplayer minecraft to be installed.",
                                 @"Sorry",nil , nil  );
             return;
         }
@@ -1081,7 +1072,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         // Setup an NSTask to run the java program.
         // Make the task and send it off
         processingTask = [[NSTask alloc] init];
-        NSString* biome_jar_path = [ NSString stringWithFormat:@"%@/%@",[ [ NSBundle mainBundle ] resourcePath ],@"MinecraftBiomeExtractor.jar" ];
+        NSString* biome_jar_path = [NSBundle.mainBundle pathForResource:@"MinecraftBiomeExtractor" ofType:@"jar"];
 
         // Tell the task where to find java
         [processingTask setLaunchPath: @"/usr/bin/java"];
@@ -2032,22 +2023,22 @@ static void screen2blockf(float x, float y, float* boxCoords)
     [panel setAllowsMultipleSelection:NO];
     [panel setPrompt:@"Select"];
 
-    if ([panel runModal] == NSOKButton)
+    if ([panel runModal] == NSModalResponseOK)
     {
     
-        if ([[panel filename] hasSuffix: @".png"])
+        if ([[[panel URL] pathExtension] caseInsensitiveCompare: @".png"] == NSOrderedSame)
         {
             MinecraftColors colors;
-            if([self createColorArrayFromPng:[panel filename] colorArray:&colors])
+            if([self createColorArrayFromPng:[panel URL].path colorArray:&colors])
             {
                 NSSavePanel *spanel = [NSSavePanel savePanel];
                 [spanel setTitle:@"Save Custom Colors"];
-                [spanel setAllowedFileTypes:[NSArray arrayWithObjects:@"txt",nil]];
+                [spanel setAllowedFileTypes: @[(id)kUTTypePlainText]];
                 [spanel setPrompt:@"Save"];
                 
-                if ([spanel runModal] == NSOKButton)
+                if ([spanel runModal] == NSModalResponseOK)
                 {
-                    [self writeColorsFromArray:&colors savePath:[spanel filename]];
+                    [self writeColorsFromArray:&colors savePath:[spanel URL].path];
                 }
             }
         }
@@ -2326,10 +2317,11 @@ NSSavePanel *panel = [NSSavePanel savePanel];
 
         // Reuse the chunk argument list and add the stuff we want
         NSMutableArray* these_settings = [NSMutableArray arrayWithArray:render_settings];
-        if ([[panel filename] hasSuffix: @"png"])
+		if ([[[panel URL] pathExtension] caseInsensitiveCompare: @"png"] == NSOrderedSame) {
             [these_settings addObject:  @"-png"];
+		}
         [these_settings addObject:  @"-file"];
-        [these_settings addObject:  [panel filename]  ];
+        [these_settings addObject:  [panel URL].path  ];
         
         [processingTask setArguments: these_settings];
         [processingTask launch];
@@ -2833,7 +2825,7 @@ if (!processing){
     BOOL isdir3;
     
     // Clear out the worlds menu
-    for(int i = ([worldsMenu numberOfItems]-1); i>-1; i--)
+    for(NSInteger i = ([worldsMenu numberOfItems]-1); i>-1; i--)
         [worldsMenu removeItemAtIndex:i];
     [mcWorlds removeAllObjects];
     
@@ -2865,13 +2857,14 @@ if (!processing){
     NSMenuItem *coloritem;
         
     // Clear out the colors menu
-    int total_items = [colorsMenu numberOfItems];
-    for (int i=(total_items-1); i>0; i--)
+    NSInteger total_items = [colorsMenu numberOfItems];
+    for (NSInteger i=(total_items-1); i>0; i--)
     {
-            coloritem = [colorsMenu itemAtIndex:i];
-            [colorsMenu removeItemAtIndex:i];
-            if (![coloritem isSeparatorItem])
-                [coloritem release];
+        coloritem = [colorsMenu itemAtIndex:i];
+        [colorsMenu removeItemAtIndex:i];
+        if (![coloritem isSeparatorItem]) {
+            [coloritem release];
+        }
     }
     
     // Fill the colors menu.
@@ -2887,9 +2880,9 @@ if (!processing){
     [colorsMenu addItem:coloritem];
     
     bool any = false;
-    while (file = [en nextObject]) 
+    for (file in en)
     {
-        if([file hasSuffix:@".txt"])
+        if([[file pathExtension] caseInsensitiveCompare:@"txt"] == NSOrderedSame)
         {
             if (!any)
             {
@@ -2911,9 +2904,9 @@ if (!processing){
     en = [fm enumeratorAtPath:[@"~/Library/Application Support/MCMap Live/" stringByExpandingTildeInPath]];
     
     any = false;
-    while (file = [en nextObject]) 
+    for (file in en)
     {
-        if([file hasSuffix:@".txt"])
+        if([[file pathExtension] caseInsensitiveCompare:@"txt"] == NSOrderedSame)
         {
             if (!any)
             {
@@ -2950,6 +2943,7 @@ if (!processing){
 
 - (void) awakeFromNib
 {
+    setStartTime();
     //[NSApp setDelegate:self];
 
     // Default Settings
@@ -2958,7 +2952,7 @@ if (!processing){
 
     
     // Setup the paths we need to know
-    mcmap_path = [ NSString stringWithFormat:@"%@/%s",[ [ NSBundle mainBundle ] resourcePath ],"mcmap" ];
+    mcmap_path = [[NSBundle.mainBundle URLForResource:@"mcmap" withExtension:nil].path copy];
     temp_dir = @"/tmp/mcmap/";
     default_colors = YES;
     mcWorlds = [[NSMutableArray alloc] init];

@@ -9,7 +9,7 @@
 
 @interface mcmap_macAppDelegate : NSObject <NSApplicationDelegate, NSFileManagerDelegate>
 {
-    NSWindow* window;
+    __unsafe_unretained NSWindow* window;
 }
 
 - (void)windowWillClose:(NSNotification *)aNotification;

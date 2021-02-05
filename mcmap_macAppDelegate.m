@@ -77,12 +77,12 @@
     
     // Empty the cache!
     NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
-    NSDirectoryEnumerator* en = [fm enumeratorAtPath:temp_dir];    
+    NSDirectoryEnumerator<NSString *>* en = [fm enumeratorAtPath:temp_dir];    
     NSError* err = nil;
     BOOL res;
     NSString* file;
 
-    while (file = [en nextObject]) {
+    for (file in en) {
         res = [fm removeItemAtPath:[temp_dir stringByAppendingPathComponent:file] error:&err];
         if (!res && err) {
             NSLog(@"oops: %@", err);

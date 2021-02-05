@@ -19,7 +19,6 @@
 
 - (IBAction)selectBlock:(id)sender;
 - (IBAction)startBlockFinder:(id)sender;
-- (void) awakeFromNib;
 - (void) windowWillClose:(NSNotification *)notification;
 - (void) windowDidBecomeKey:(NSNotification *)notification; 
 

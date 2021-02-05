@@ -19,7 +19,7 @@
 		148A5BC81274D9AF0061AC55 /* MCMapPrefsController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 148A5BC71274D9AF0061AC55 /* MCMapPrefsController.mm */; };
 		148F6609128DCBA000317975 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 148F6608128DCBA000317975 /* libz.dylib */; };
 		148F6613128DCC9A00317975 /* MapInfoPanelController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 148F6612128DCC9A00317975 /* MapInfoPanelController.mm */; };
-		14A9E816125E74900058D2C3 /* mcmap in Resources */ = {isa = PBXBuildFile; fileRef = 14A9E815125E74900058D2C3 /* mcmap */; };
+		14A9E816125E74900058D2C3 /* mcmap in CopyFiles */ = {isa = PBXBuildFile; fileRef = 14A9E815125E74900058D2C3 /* mcmap */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		14A9E859125F54210058D2C3 /* MCMapOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14A9E857125F54210058D2C3 /* MCMapOpenGLView.mm */; };
 		14A9E8B4125F689F0058D2C3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A9E8B3125F689F0058D2C3 /* OpenGL.framework */; };
 		14A9E8BA125F68C40058D2C3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A9E8B9125F68C40058D2C3 /* GLUT.framework */; };
@@ -27,7 +27,6 @@
 		14B1C63D128937A200DBF7EB /* extracting_biome.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B1C63C128937A200DBF7EB /* extracting_biome.png */; };
 		14BD18D7126082000038A3DA /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14BD18D6126082000038A3DA /* ApplicationServices.framework */; };
 		14CD03561270E94A00ED2060 /* help in Resources */ = {isa = PBXBuildFile; fileRef = 14CD03531270E94A00ED2060 /* help */; };
-		14CD590B1262F03A00B62A43 /* MCMap-Live.icns in Resources */ = {isa = PBXBuildFile; fileRef = 14CD590A1262F03A00B62A43 /* MCMap-Live.icns */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* mcmap_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* mcmap_macAppDelegate.m */; };
 		55DC5F6F25CD100C0061DE63 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55DC5F6E25CD100C0061DE63 /* Media.xcassets */; };
@@ -38,12 +37,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1473032C126AF6F80068F97A /* CopyFiles */ = {
+		1473032C126AF6F80068F97A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55EEC02D25CD501000F484D0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				14A9E816125E74900058D2C3 /* mcmap in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +88,6 @@
 		14B1C63C128937A200DBF7EB /* extracting_biome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extracting_biome.png; sourceTree = "<group>"; };
 		14BD18D6126082000038A3DA /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		14CD03531270E94A00ED2060 /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = help; sourceTree = "<group>"; };
-		14CD590A1262F03A00B62A43 /* MCMap-Live.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "MCMap-Live.icns"; sourceTree = "<group>"; };
 		256AC3D80F4B6AC300CF3369 /* mcmap_macAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mcmap_macAppDelegate.h; sourceTree = "<group>"; };
 		256AC3D90F4B6AC300CF3369 /* mcmap_macAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mcmap_macAppDelegate.m; sourceTree = "<group>"; };
 		256AC3F00F4B6AF500CF3369 /* mcmap_mac_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mcmap_mac_Prefix.pch; sourceTree = "<group>"; };
@@ -170,6 +179,7 @@
 			);
 			name = "mcmap-mac";
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
@@ -194,7 +204,6 @@
 				145D5FD6127E49A200226D8C /* rendering_world.png */,
 				14730439126B99490068F97A /* rendering.png */,
 				1473043A126B99490068F97A /* begin.png */,
-				14CD590A1262F03A00B62A43 /* MCMap-Live.icns */,
 				14A9E815125E74900058D2C3 /* mcmap */,
 				14B1C5EB12892A5A00DBF7EB /* MinecraftBiomeExtractor.jar */,
 				8D1107310486CEB800E47090 /* mcmap_mac-Info.plist */,
@@ -223,7 +232,8 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
-				1473032C126AF6F80068F97A /* CopyFiles */,
+				1473032C126AF6F80068F97A /* Embed Frameworks */,
+				55EEC02D25CD501000F484D0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -270,9 +280,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
-				14A9E816125E74900058D2C3 /* mcmap in Resources */,
 				14B1C5FF12892BB600DBF7EB /* MinecraftBiomeExtractor.jar in Resources */,
-				14CD590B1262F03A00B62A43 /* MCMap-Live.icns in Resources */,
 				1473043B126B99490068F97A /* rendering.png in Resources */,
 				1473043C126B99490068F97A /* begin.png in Resources */,
 				14730532126BC2FF0068F97A /* Colors in Resources */,
@@ -330,6 +338,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MCMap-Live";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "-";
@@ -344,6 +353,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = mcmap_mac_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_FILE = "mcmap_mac-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MARKETING_VERSION = 1.6.3;
@@ -357,6 +367,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MCMap-Live";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "-";
@@ -369,6 +380,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = mcmap_mac_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_FILE = "mcmap_mac-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MARKETING_VERSION = 1.6.3;
