@@ -5,4 +5,6 @@ build/
 DerivedData/
 .svn
 .xcodeproj/ !*.xcodeproj/project.pbxproj
-
+*.mode?v?
+*.mode?
+*.pbxuser
