@@ -171,9 +171,7 @@
 		29B97314FDCFA39411CA2CEA /* mcmap-mac */ = {
 			isa = PBXGroup;
 			children = (
-				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
+				55EEC02E25CD58BE00F484D0 /* Legacy Cocoa */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -220,6 +218,16 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55EEC02E25CD58BE00F484D0 /* Legacy Cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+			);
+			path = "Legacy Cocoa";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,9 +360,9 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = mcmap_mac_Prefix.pch;
+				GCC_PREFIX_HEADER = "Legacy Cocoa/mcmap_mac_Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
-				INFOPLIST_FILE = "mcmap_mac-Info.plist";
+				INFOPLIST_FILE = "Legacy Cocoa/mcmap_mac-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.oe.${PRODUCT_NAME:rfc1034identifier}";
@@ -379,9 +387,9 @@
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = mcmap_mac_Prefix.pch;
+				GCC_PREFIX_HEADER = "Legacy Cocoa/mcmap_mac_Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
-				INFOPLIST_FILE = "mcmap_mac-Info.plist";
+				INFOPLIST_FILE = "Legacy Cocoa/mcmap_mac-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.oe.${PRODUCT_NAME:rfc1034identifier}";
