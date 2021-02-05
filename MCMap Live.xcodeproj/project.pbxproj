@@ -41,6 +41,7 @@
 		55EEC04F25CDED5C00F484D0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 148F6608128DCBA000317975 /* libz.tbd */; };
 		55EEC05025CDED6200F484D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		55EEC05325CDEE5800F484D0 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55DC5F6E25CD100C0061DE63 /* Media.xcassets */; };
+		55EEC05825CDFC3200F484D0 /* MapChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EEC05725CDFC3200F484D0 /* MapChunk.swift */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -124,6 +125,7 @@
 		55EEC03A25CD5A2300F484D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		55EEC03C25CD5A2300F484D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EEC03D25CD5A2300F484D0 /* MCMap_Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MCMap_Swift.entitlements; sourceTree = "<group>"; };
+		55EEC05725CDFC3200F484D0 /* MapChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapChunk.swift; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* mcmap_mac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "mcmap_mac-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MCMap Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MCMap Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08EB6FB1514604300B64375 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				55EEC03525CD5A2200F484D0 /* AppDelegate.swift */,
+				55EEC05725CDFC3200F484D0 /* MapChunk.swift */,
 				55EEC03725CD5A2200F484D0 /* Assets.xcassets */,
 				55EEC03925CD5A2300F484D0 /* MainMenu.xib */,
 				55EEC03C25CD5A2300F484D0 /* Info.plist */,
@@ -401,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EEC05825CDFC3200F484D0 /* MapChunk.swift in Sources */,
 				55EEC03625CD5A2200F484D0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

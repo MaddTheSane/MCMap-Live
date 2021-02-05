@@ -31,10 +31,8 @@ int getBaseLod(float zoom)
 }
 
 // Setup all the class vars
-MapChunk::MapChunk(int bx, int by)
+MapChunk::MapChunk(int bx, int by) : x(bx), y(by)
 {
-    x = bx;
-    y = by;
     for(int i=0; i<6;i++)
         texture[i] = 0;
     onDisk = false;
@@ -516,6 +514,6 @@ void MapChunk::setupClass(GLuint loadingTexture, NSString *mcmap_path, NSString 
     MapChunk::loadingTexture = loadingTexture;
     MapChunk::mcmap_path = [mcmap_path retain];
     MapChunk::temp_path = [temp_path retain];
-    MapChunk::render_settings = [render_settings retain];
+    MapChunk::render_settings = [render_settings copy];
 }
 
