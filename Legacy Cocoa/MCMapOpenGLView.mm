@@ -41,7 +41,7 @@ bool useMipMaps = YES;
 bool worldLoaded = NO;
 std::set< std::pair<int,int> > hasContent;
 MapChunk **worldmap = NULL;
-NSString *dimensionPath = [OVERWORLD_DIMENSION_PATH retain];
+NSString *dimensionPath = OVERWORLD_DIMENSION_PATH;
 NSInteger mystAge = 0;
 NSSavePanel* currentsavepanel;
 
@@ -284,7 +284,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         //NSOpenGLPFADepthSize, (NSOpenGLPixelFormatAttribute)16, // 16 bit depth buffer
         (NSOpenGLPixelFormatAttribute)0
     };
-    return [[[NSOpenGLPixelFormat alloc] initWithAttributes:attributes] autorelease];
+    return [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
 }
 
 -(void) drawLoadMsg
@@ -609,7 +609,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         [panel setAllowsMultipleSelection:NO];
         [panel setPrompt:@"Set Colors"];
 
-        if ([panel runModal] == NSOKButton)
+        if ([panel runModal] == NSModalResponseOK)
         {
             if ([[[panel URL] pathExtension] caseInsensitiveCompare:@"txt"] == NSOrderedSame)
             {
@@ -623,7 +623,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
                 if([self createColorArrayFromPng:[panel URL] colorArray:&colors])
                 {
                     [self writeColorsFromArray:&colors savePath:[NSURL fileURLWithPath:@"/tmp/terrain.txt"]];
-                    colors_path = [@"/tmp/terrain.txt" retain];
+                    colors_path = @"/tmp/terrain.txt";
                     default_colors = NO;
                     changed = YES;
                 }
@@ -1106,7 +1106,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         if (isdir && exists)        
         {
             // Empty the biome metadata folder.
-            NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
+            NSFileManager* fm = [[NSFileManager alloc] init];
             NSDirectoryEnumerator* en = [fm enumeratorAtPath:biome_dir];    
             NSError* err = nil;
             BOOL res;
@@ -1198,7 +1198,6 @@ static void screen2blockf(float x, float y, float* boxCoords)
                     {
                         [processingTask terminate];
                         [processingTask waitUntilExit];
-                        [processingTask release];
                         processingTask = Nil;
                     }
                     processing = NO;
@@ -1789,25 +1788,22 @@ static void screen2blockf(float x, float y, float* boxCoords)
 
 	// init fonts for use with strings
 	NSFont * font =[NSFont fontWithName:@"Helvetica" size:12.0];
-	stanStringAttrib = [[NSMutableDictionary dictionary] retain];
+	stanStringAttrib = [[NSMutableDictionary alloc] init];
 	[stanStringAttrib setObject:font forKey:NSFontAttributeName];
 	[stanStringAttrib setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
-	[font release];
     
-    NSString* rt_path = [ NSString stringWithFormat:@"%@/%s",[ [ NSBundle mainBundle ] resourcePath ],"rendering.png" ];
+    NSString* rt_path = [NSBundle.mainBundle pathForImageResource:@"rendering"];
     renderingTexture = loadTexture(rt_path);
-    rt_path = [NSBundle.mainBundle URLForImageResource:@"begin"].path;
+    rt_path = [NSBundle.mainBundle pathForImageResource:@"begin"];
     beginTexture = loadTexture(rt_path);
-    rt_path = [NSBundle.mainBundle URLForImageResource:@"rendering_selection"].path;
+    rt_path = [NSBundle.mainBundle pathForImageResource:@"rendering_selection"];
     saveChunkTexture = loadTexture(rt_path);
-    rt_path = [NSBundle.mainBundle URLForImageResource:@"rendering_world"].path;
+    rt_path = [NSBundle.mainBundle pathForImageResource:@"rendering_world"];
     saveWorldTexture = loadTexture(rt_path);
-    rt_path = [NSBundle.mainBundle URLForImageResource:@"extracting_biome"].path;
+    rt_path = [NSBundle.mainBundle pathForImageResource:@"extracting_biome"];
     biomeExtractTexture = loadTexture(rt_path);
     
     [self setupMapChunk];
-
-
 }
 
 // ---------------------------------
@@ -1859,7 +1855,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
     [panel setAllowsMultipleSelection:NO];
     [panel setPrompt:@"Open World"];
 
-    if ([panel runModal] == NSOKButton)
+        if ([panel runModal] == NSModalResponseOK)
     {
         if ([[NSFileManager defaultManager] fileExistsAtPath:[[panel URL].path stringByAppendingPathComponent:@"level.dat"] isDirectory:nil])
         {
@@ -2013,9 +2009,6 @@ static void screen2blockf(float x, float y, float* boxCoords)
     
     // Write to file
     [mutstr writeToURL:savepath atomically:YES encoding:NSASCIIStringEncoding error:Nil];
-    
-    // Deallocate string
-    [mutstr release];
 }
 
 - (IBAction) createColorsTxt: (id) sender
@@ -2130,8 +2123,6 @@ static void screen2blockf(float x, float y, float* boxCoords)
                 }
             }
         }
-
-        [fileManager release];
         
         //maxX = maxX+1;
         //maxY = maxY+1;
@@ -2303,7 +2294,7 @@ if (!processing)
 NSSavePanel *panel = [NSSavePanel savePanel];
 
     [panel setTitle:@"Save World Image"];
-    [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"png",nil]];
+    [panel setAllowedFileTypes:@[(id)kUTTypePNG]];
     [panel setPrompt:@"Save Image"];
     currentsavepanel = panel;
     [panel setAccessoryView:imageFormat];
@@ -2351,7 +2342,7 @@ NSSavePanel *panel = [NSSavePanel savePanel];
     [these_settings addObject:[NSString stringWithFormat:@"%i",maxx]];
     [these_settings addObject:[NSString stringWithFormat:@"%i",maxy]];
     
-    if ([savepath hasSuffix: @"png"])
+    if ([savepath.pathExtension caseInsensitiveCompare:@"png"] == NSOrderedSame)
         [these_settings addObject:  @"-png"];
     [these_settings addObject:  @"-file"];
     [these_settings addObject:  savepath  ];
@@ -2368,7 +2359,7 @@ if (!processing){
         NSSavePanel *panel = [NSSavePanel savePanel];
 
         [panel setTitle:@"Save Slice Sequence"];
-        [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"png",nil]];
+        [panel setAllowedFileTypes:@[(id)kUTTypePNG]];
         [panel setPrompt:@"Save Sequence"];
         currentsavepanel = panel;
         [panel setAccessoryView:imageFormat];
@@ -2410,7 +2401,7 @@ if (!processing){
             slice_miny = (min(ul[1],br[1])-noy)*8;
             slice_maxy = (max(ul[1],br[1])-noy)*8;
             
-            slice_basename = [[[panel filename] substringToIndex: [[panel filename] length]-4] retain];
+            slice_basename = [[[panel URL].path stringByDeletingPathExtension] copy];
             
             processing = YES;
             saveChunk = YES;
@@ -2430,7 +2421,7 @@ if (!processing){
     NSSavePanel *panel = [NSSavePanel savePanel];
 
     [panel setTitle:@"Save Image"];
-    [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"png",nil]];
+    [panel setAllowedFileTypes:@[(id)kUTTypePNG]];
     [panel setPrompt:@"Save Image"];
     currentsavepanel = panel;
     [panel setAccessoryView:imageFormat];
@@ -2489,7 +2480,6 @@ if (!processing){
         // Clean up the processing task
         if (processingTask != Nil)
         {
-            [processingTask release];
             processingTask = Nil;
         }
         
@@ -2505,8 +2495,9 @@ if (!processing){
         {
             if (extractBiome)
                 [self finishGenerateBiomes];
-            if (saveSliceSequence)
-                [slice_basename release];
+            if (saveSliceSequence) {
+                slice_basename = nil;
+            }
             processing = NO;
             saveSliceSequence = NO;
             saveWorld = NO;   
@@ -2557,7 +2548,7 @@ if (!processing){
     renderers.clear();
 
     // Empty the scratch folder.
-    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager* fm = [[NSFileManager alloc] init];
     NSDirectoryEnumerator* en = [fm enumeratorAtPath:temp_dir];    
     NSError* err = nil;
     BOOL res;
@@ -2585,9 +2576,9 @@ if (!processing){
     else if (orientation == 3) 
         orientation_string = @"-south";
     
-    render_settings = [NSMutableArray arrayWithObjects:    current_world_path,
-                                                    orientation_string,
-                                                    nil ];
+    render_settings = [[NSMutableArray alloc] initWithObjects:current_world_path,
+                       orientation_string,
+                       nil];
     if (noise_level > 0)
     {
         [render_settings addObject: @"-noise"];
@@ -2679,13 +2670,11 @@ if (!processing){
 
     if ([END_DIMENSION_PATH isEqualToString:dimensionPath])
     {
-        [dimensionPath release];
-        dimensionPath = [OVERWORLD_DIMENSION_PATH retain];
+        dimensionPath = [OVERWORLD_DIMENSION_PATH copy];
     }
     else
     {
-        [dimensionPath release];
-        dimensionPath = [END_DIMENSION_PATH retain];
+        dimensionPath = [END_DIMENSION_PATH copy];
         [endMenuItem setState:NSOnState];
     }
     
@@ -2702,13 +2691,11 @@ if (!processing){
 {
     if ([sender state] == NSOnState) {
         [self clearDimensionMenuItems];
-        [dimensionPath release];
-        dimensionPath = [OVERWORLD_DIMENSION_PATH retain];
+        dimensionPath = [OVERWORLD_DIMENSION_PATH copy];
     } else {
         [self clearDimensionMenuItems];
         [sender setState:NSOnState];
-        [dimensionPath release];
-        dimensionPath = [[NSString stringWithFormat:@"DIM_MYST%ld/region", sender.tag] retain];
+        dimensionPath = [[NSString stringWithFormat:@"DIM_MYST%ld/region", sender.tag] copy];
         mystAge = sender.tag;
     }
     
@@ -2851,7 +2838,6 @@ if (!processing){
             [worldsMenu addItem:worlditem];
         }
     }
-    [fm release];
 }
 
 - (void) rescanColorsMenu
@@ -2864,9 +2850,6 @@ if (!processing){
     {
         coloritem = [colorsMenu itemAtIndex:i];
         [colorsMenu removeItemAtIndex:i];
-        if (![coloritem isSeparatorItem]) {
-            [coloritem release];
-        }
     }
     
     // Fill the colors menu.
@@ -2938,7 +2921,6 @@ if (!processing){
     customcolorsMenuItem = coloritem;
     [coloritem setTarget:self];
     [colorsMenu addItem:coloritem];
-    [fm release];
 }
 
 - (void) awakeFromNib

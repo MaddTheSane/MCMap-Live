@@ -54,7 +54,6 @@ BOOL color_stored = NO;
     //NSLog(@"Ready to fire setup message.");
     [mapview startBlockFinder:blocks inColor:[finderColor color] xray:xray];
     //NSLog(@"Set up Block Finder color set.");
-    [blocks release];
 }
 
 - (void)awakeFromNib

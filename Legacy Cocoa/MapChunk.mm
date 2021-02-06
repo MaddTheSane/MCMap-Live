@@ -321,7 +321,6 @@ void MapChunk::invalidate()
     {
         [renderer terminate];
         //[renderer waitUntilExit];
-        [renderer release];
         renderer = Nil;
     }
     
@@ -450,7 +449,6 @@ bool MapChunk::renderIsDone()
         return false;
     
     onDisk = true;
-    [renderer release];
     renderer = Nil;
     return true;
 }
@@ -512,8 +510,8 @@ bool MapChunk::isVisible(float left, float right, float top, float bottom, float
 void MapChunk::setupClass(GLuint loadingTexture, NSString *mcmap_path, NSString *temp_path, NSArray *render_settings)
 {
     MapChunk::loadingTexture = loadingTexture;
-    MapChunk::mcmap_path = [mcmap_path retain];
-    MapChunk::temp_path = [temp_path retain];
+    MapChunk::mcmap_path = [mcmap_path copy];
+    MapChunk::temp_path = [temp_path copy];
     MapChunk::render_settings = [render_settings copy];
 }
 

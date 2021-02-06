@@ -14,7 +14,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     NSString* temp_dir = @"/tmp/mcmap/";
-    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager* fm = [[NSFileManager alloc] init];
     [fm setDelegate: self];
     NSDirectoryEnumerator* en;    
     NSError* err = nil;
@@ -76,7 +76,7 @@
     NSString* temp_dir = @"/tmp/mcmap/";
     
     // Empty the cache!
-    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager* fm = [[NSFileManager alloc] init];
     NSDirectoryEnumerator<NSString *>* en = [fm enumeratorAtPath:temp_dir];    
     NSError* err = nil;
     BOOL res;

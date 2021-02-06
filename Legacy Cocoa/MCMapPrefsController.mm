@@ -36,7 +36,7 @@ NSMutableArray* user_colors;
 {
     [user_colors removeAllObjects];
     // Fill the colors listbox.
-    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager* fm = [[NSFileManager alloc] init];
     NSDirectoryEnumerator<NSString *>* en = [fm enumeratorAtPath:[@"~/Library/Application Support/MCMap Live/" stringByExpandingTildeInPath]];    
     NSError* err = nil;
     NSString* file;
