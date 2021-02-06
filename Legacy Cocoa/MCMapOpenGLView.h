@@ -182,8 +182,8 @@ typedef struct recCamera {
 
 // Utility functions
 - (BOOL) createColorArrayFromTextFile:(NSString*)textpath colorArray:(MinecraftColors*)colors;
-- (BOOL) createColorArrayFromPng:(NSString*)loadpath colorArray:(MinecraftColors*)colors;
-- (void) writeColorsFromArray:(MinecraftColors*)colors savePath:(NSString*)savepath;
+- (BOOL) createColorArrayFromPng:(NSURL*)loadpath colorArray:(MinecraftColors*)colors;
+- (void) writeColorsFromArray:(MinecraftColors*)colors savePath:(NSURL*)savepath;
 - (void) startBlockFinder:(NSArray*)blocksToShow inColor:(NSColor*)color xray:(double)xray;
 - (void) storeColor;
 - (void) restoreColor;

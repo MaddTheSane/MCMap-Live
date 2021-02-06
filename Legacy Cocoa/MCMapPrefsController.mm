@@ -62,7 +62,7 @@ NSMutableArray* user_colors;
     while([[NSFileManager defaultManager] fileExistsAtPath: savepath])
     {
         i++;
-        savepath = [NSString stringWithFormat:[@"~/Library/Application Support/MCMap Live/New Color Set %i.txt" stringByExpandingTildeInPath],i];
+        savepath = [[NSString stringWithFormat:@"~/Library/Application Support/MCMap Live/New Color Set %i.txt", i] stringByExpandingTildeInPath];
     }
     
     NSOpenPanel *panel = [NSOpenPanel openPanel];
@@ -75,17 +75,17 @@ NSMutableArray* user_colors;
 
     if ([panel runModal] == NSModalResponseOK)
     {
-        if ([[panel filename] hasSuffix: @".txt"])
+        if ([[[panel URL] pathExtension] caseInsensitiveCompare:@"txt"] == NSOrderedSame)
         {
             // Copy the file
             [[NSFileManager defaultManager] copyItemAtURL:[panel URL] toURL:[NSURL fileURLWithPath:savepath] error:nil];
         }
-        else if ([[panel filename] hasSuffix: @".png"])
+        else if ([[[panel URL] pathExtension] caseInsensitiveCompare:@"png"] == NSOrderedSame)
         {
             MinecraftColors colors;
-            if([mapview createColorArrayFromPng:[panel URL].path colorArray:&colors])
+            if([mapview createColorArrayFromPng:[panel URL] colorArray:&colors])
             {
-                [mapview writeColorsFromArray:&colors savePath:savepath];
+                [mapview writeColorsFromArray:&colors savePath:[NSURL fileURLWithPath:savepath]];
             }
         }
     }
@@ -100,8 +100,8 @@ NSMutableArray* user_colors;
     NSInteger rowIndex = [colorsTable selectedRow];
     if (rowIndex >= 0 && rowIndex < [user_colors count])
     {
-        NSString* srcpath = [NSString stringWithFormat:[@"~/Library/Application Support/MCMap Live/%@.txt" stringByExpandingTildeInPath],
-                                    [user_colors objectAtIndex:rowIndex]];
+        NSString* srcpath = [[NSString stringWithFormat:@"~/Library/Application Support/MCMap Live/%@.txt",
+                                    [user_colors objectAtIndex:rowIndex]] stringByExpandingTildeInPath];
         
         NSError* err = nil;
         [[NSFileManager defaultManager] removeItemAtPath:srcpath error:&err];
@@ -153,8 +153,6 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
     [mapview rescanColorsMenu];
     
     return;
-    
-    
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView

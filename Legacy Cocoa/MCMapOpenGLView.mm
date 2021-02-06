@@ -13,7 +13,13 @@
 
 // ==================================
 
-typedef enum RenderLightingModes {UNIFORM, DAY, NIGHT, TORCHLIGHT, CAVE} LightingMode;
+typedef NS_ENUM(NSInteger, LightingMode) {
+    UNIFORM,
+    DAY,
+    NIGHT,
+    TORCHLIGHT,
+    CAVE
+};
 
 static NSString *const OVERWORLD_DIMENSION_PATH = @"region";
 static NSString *const END_DIMENSION_PATH = @"DIM1/region";
@@ -516,7 +522,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
     MinecraftColors colors;
     
     // Load up some colors.
-    [self createColorArrayFromTextFile:[ NSString stringWithFormat:@"%@/Colors/Minecraft.txt",[ [ NSBundle mainBundle ] resourcePath ]] colorArray:&colors];
+    [self createColorArrayFromTextFile:[[NSBundle mainBundle] URLForResource:@"Minecraft" withExtension:@"txt" subdirectory:@"Colors"].path colorArray:&colors];
     
     // Alter them so everything but selected blocks are the given color.
     for(int i=0;i<MINECRAFT_TILE_COUNT;i++)
@@ -541,7 +547,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
     }
     
     // Write them out
-    [self writeColorsFromArray:&colors savePath:colors_path];
+    [self writeColorsFromArray:&colors savePath:[NSURL fileURLWithPath:colors_path]];
     
     // Tell the map that new colors were set
     [self setColors:Nil];
@@ -597,7 +603,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
     {
         NSOpenPanel *panel = [NSOpenPanel openPanel];
         [panel setCanChooseFiles:YES];
-        [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"txt",@"png",nil]];
+        [panel setAllowedFileTypes:@[(id)kUTTypePlainText,(id)kUTTypePNG]];
         [panel setCanChooseDirectories:NO];
         [panel setResolvesAliases:YES];
         [panel setAllowsMultipleSelection:NO];
@@ -605,19 +611,19 @@ static void screen2blockf(float x, float y, float* boxCoords)
 
         if ([panel runModal] == NSOKButton)
         {
-            if ([[panel filename] hasSuffix: @".txt"])
+            if ([[[panel URL] pathExtension] caseInsensitiveCompare:@"txt"] == NSOrderedSame)
             {
-                colors_path = [[panel filename] retain];
+                colors_path = [[panel URL].path copy];
                 default_colors = NO;
                 changed = YES;
             }
-            else if ([[panel filename] hasSuffix: @".png"])
+            else if ([[[panel URL] pathExtension] caseInsensitiveCompare:@"png"] == NSOrderedSame)
             {
                 MinecraftColors colors;
-                if([self createColorArrayFromPng:[panel filename] colorArray:&colors])
+                if([self createColorArrayFromPng:[panel URL] colorArray:&colors])
                 {
-                    [self writeColorsFromArray:&colors savePath:@"/tmp/terrain.txt"];
-                    colors_path = @"/tmp/terrain.txt";
+                    [self writeColorsFromArray:&colors savePath:[NSURL fileURLWithPath:@"/tmp/terrain.txt"]];
+                    colors_path = [@"/tmp/terrain.txt" retain];
                     default_colors = NO;
                     changed = YES;
                 }
@@ -864,7 +870,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         MinecraftColors colors;        
         
         // Load the current color set
-        [self createColorArrayFromTextFile:[NSString stringWithFormat:@"%@/Colors/Minecraft.txt", [[NSBundle mainBundle] resourcePath]] colorArray:&colors];
+        [self createColorArrayFromTextFile:[[NSBundle mainBundle] URLForResource:@"Minecraft" withExtension:@"txt" subdirectory:@"Colors"].path colorArray:&colors];
         
         // Lower transparency and lighten color of water
         colors.c[8][0] = 82;
@@ -877,7 +883,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         colors.c[9][3] = 8; // Standing Water
         
         // Write out the new file
-        [self writeColorsFromArray:&colors savePath:colors_path];
+        [self writeColorsFromArray:&colors savePath:[NSURL fileURLWithPath:colors_path]];
         
         // Tell the map that new colors were set
         [self setColors:Nil];
@@ -1900,8 +1906,8 @@ static void screen2blockf(float x, float y, float* boxCoords)
 
 - (BOOL) createColorArrayFromTextFile:(NSString*)textpath colorArray:(MinecraftColors*)colors
 {
-    NSError** err = nil;
-    NSString* colortxt = [NSString stringWithContentsOfFile:textpath encoding:NSASCIIStringEncoding error:err];
+    NSError* err = nil;
+    NSString* colortxt = [NSString stringWithContentsOfFile:textpath encoding:NSASCIIStringEncoding error:&err];
 
     if (err) {
         return NO;
@@ -1934,14 +1940,14 @@ static void screen2blockf(float x, float y, float* boxCoords)
     return YES;
 }
 
-- (BOOL) createColorArrayFromPng:(NSString*)loadpath colorArray:(MinecraftColors*)colors
+- (BOOL) createColorArrayFromPng:(NSURL*)loadpath colorArray:(MinecraftColors*)colors
 {
     NSBitmapImageRep *theImage;
     NSInteger width, height, bytesPRow;
     unsigned char *fixedImageData;
     
     // Load the image into an NSBitmapImageRep
-    theImage = [ NSBitmapImageRep imageRepWithContentsOfFile:loadpath ];
+    theImage = [ NSBitmapImageRep imageRepWithContentsOfURL:loadpath ];
     if( theImage != nil )
     {
         // Get some key info on the texture that was just loaded.
@@ -1993,20 +1999,20 @@ static void screen2blockf(float x, float y, float* boxCoords)
     return NO;
 }
 
-- (void) writeColorsFromArray:(MinecraftColors*)colors savePath:(NSString*)savepath
+- (void) writeColorsFromArray:(MinecraftColors*)colors savePath:(NSURL*)savepath
 {
     // Create and allocate string
     NSMutableString *mutstr = [[NSMutableString alloc] init];
     
     // Header
-    [mutstr appendFormat: @"#ID   R   G   B   A   Noise\n"];
+    [mutstr appendString: @"#ID   R   G   B   A   Noise\n"];
     
     // All the entires
     for(int i = 0; i < MINECRAFT_TILE_COUNT; i++)
         [mutstr appendFormat:@"%i   %i   %i   %i   %i   %i\n", i, colors->c[i][0],colors->c[i][1],colors->c[i][2],colors->c[i][3], colors->c[i][4]];
     
     // Write to file
-    [mutstr writeToFile:savepath atomically:YES encoding:NSASCIIStringEncoding error:Nil];
+    [mutstr writeToURL:savepath atomically:YES encoding:NSASCIIStringEncoding error:Nil];
     
     // Deallocate string
     [mutstr release];
@@ -2017,7 +2023,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     [panel setCanChooseFiles:YES];
     [panel setTitle:@"Select a terrain.png"];
-    [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"png",nil]];
+    [panel setAllowedFileTypes:@[(id)kUTTypePNG]];
     [panel setCanChooseDirectories:NO];
     [panel setResolvesAliases:YES];
     [panel setAllowsMultipleSelection:NO];
@@ -2025,24 +2031,19 @@ static void screen2blockf(float x, float y, float* boxCoords)
 
     if ([panel runModal] == NSModalResponseOK)
     {
-    
-        if ([[[panel URL] pathExtension] caseInsensitiveCompare: @".png"] == NSOrderedSame)
+        MinecraftColors colors;
+        if([self createColorArrayFromPng:[panel URL] colorArray:&colors])
         {
-            MinecraftColors colors;
-            if([self createColorArrayFromPng:[panel URL].path colorArray:&colors])
+            NSSavePanel *spanel = [NSSavePanel savePanel];
+            [spanel setTitle:@"Save Custom Colors"];
+            [spanel setAllowedFileTypes: @[(id)kUTTypePlainText]];
+            [spanel setPrompt:@"Save"];
+            
+            if ([spanel runModal] == NSModalResponseOK)
             {
-                NSSavePanel *spanel = [NSSavePanel savePanel];
-                [spanel setTitle:@"Save Custom Colors"];
-                [spanel setAllowedFileTypes: @[(id)kUTTypePlainText]];
-                [spanel setPrompt:@"Save"];
-                
-                if ([spanel runModal] == NSModalResponseOK)
-                {
-                    [self writeColorsFromArray:&colors savePath:[spanel URL].path];
-                }
+                [self writeColorsFromArray:&colors savePath:[spanel URL]];
             }
         }
-    
     }
 }
 
@@ -2075,7 +2076,7 @@ static void screen2blockf(float x, float y, float* boxCoords)
         NSArray *possibleRegions;
         NSFileManager *fileManager = [[NSFileManager alloc] init];
 
-        NSString *currentDimensionPath = [NSString stringWithFormat:@"%@/%@", worldPath, dimensionPath];
+        NSString *currentDimensionPath = [worldPath stringByAppendingPathComponent:dimensionPath];
         
         if ([fileManager fileExistsAtPath:currentDimensionPath isDirectory:&isDir] && isDir)
         {
@@ -2307,7 +2308,7 @@ NSSavePanel *panel = [NSSavePanel savePanel];
     currentsavepanel = panel;
     [panel setAccessoryView:imageFormat];
 
-    if ([panel runModal] == NSOKButton)
+    if ([panel runModal] == NSModalResponseOK)
     {
         // Make the task and send it off
         processingTask = [[NSTask alloc] init];
@@ -2372,7 +2373,7 @@ if (!processing){
         currentsavepanel = panel;
         [panel setAccessoryView:imageFormat];
 
-        if ([panel runModal] == NSOKButton)
+        if ([panel runModal] == NSModalResponseOK)
         {
 
             // Find the proper bounds
@@ -2434,7 +2435,7 @@ if (!processing){
     currentsavepanel = panel;
     [panel setAccessoryView:imageFormat];
 
-    if ([panel runModal] == NSOKButton)
+    if ([panel runModal] == NSModalResponseOK)
     {
 
         // Find the proper bounds
@@ -2830,7 +2831,7 @@ if (!processing){
     [mcWorlds removeAllObjects];
     
     // Scan the worlds folder
-    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager* fm = [[NSFileManager alloc] init];
     NSString* worldspath = [@"~/Library/Application Support/minecraft/saves/" stringByExpandingTildeInPath];
     if ([fm fileExistsAtPath:worldspath isDirectory:&isdir] && isdir)
         [fm changeCurrentDirectoryPath:worldspath];
@@ -2841,15 +2842,16 @@ if (!processing){
         NSString* possibleWorld = [possibleWorlds objectAtIndex:i];
         
         if(     [fm fileExistsAtPath:possibleWorld isDirectory:&isdir] && isdir 
-            &&  [fm fileExistsAtPath:[NSString stringWithFormat:@"%@/region",possibleWorld] isDirectory:&isdir2] && isdir2
-            &&  [fm fileExistsAtPath:[NSString stringWithFormat:@"%@/level.dat",possibleWorld] isDirectory:&isdir3] && !isdir3 )
+            &&  [fm fileExistsAtPath:[possibleWorld stringByAppendingPathComponent:@"region"] isDirectory:&isdir2] && isdir2
+            &&  [fm fileExistsAtPath:[possibleWorld stringByAppendingPathComponent:@"level.dat"] isDirectory:&isdir3] && !isdir3 )
         {
-            [mcWorlds addObject:[NSString stringWithFormat:@"%@/%@",worldspath,possibleWorld]];
-            worlditem = [[NSMenuItem alloc] initWithTitle:[[possibleWorld componentsSeparatedByString:@"/"] lastObject] action:@selector(openWorld:) keyEquivalent:@""]; 
+            [mcWorlds addObject:[worldspath stringByAppendingPathComponent:possibleWorld]];
+            worlditem = [[NSMenuItem alloc] initWithTitle:[possibleWorld lastPathComponent] action:@selector(openWorld:) keyEquivalent:@""];
             [worlditem setTarget:self];
             [worldsMenu addItem:worlditem];
         }
     }
+    [fm release];
 }
 
 - (void) rescanColorsMenu
@@ -2868,8 +2870,9 @@ if (!processing){
     }
     
     // Fill the colors menu.
-    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
-    NSDirectoryEnumerator* en = [fm enumeratorAtPath:[ NSString stringWithFormat:@"%@/Colors/",[ [ NSBundle mainBundle ] resourcePath ]]];    
+    NSFileManager* fm = [[NSFileManager alloc] init];
+    NSArray *arr = [[NSBundle mainBundle] URLsForResourcesWithExtension:@"txt" subdirectory:@"Colors"];
+    NSDirectoryEnumerator<NSString *>* en = nil;
     NSError* err = nil;
     NSString* file;
     
@@ -2880,7 +2883,7 @@ if (!processing){
     [colorsMenu addItem:coloritem];
     
     bool any = false;
-    for (file in en)
+    for (NSURL *file in arr)
     {
         if([[file pathExtension] caseInsensitiveCompare:@"txt"] == NSOrderedSame)
         {
@@ -2889,14 +2892,10 @@ if (!processing){
                 [colorsMenu addItem:[NSMenuItem separatorItem]];
                 any = true;
             }
-            coloritem = [[NSMenuItem alloc] initWithTitle:[file substringToIndex:[file length] - 4] action:@selector(setColors:) keyEquivalent:@""]; 
+            coloritem = [[NSMenuItem alloc] initWithTitle:[[file lastPathComponent] stringByDeletingPathExtension] action:@selector(setColors:) keyEquivalent:@""];
             [coloritem setTag:1];
             [coloritem setTarget:self];
             [colorsMenu addItem:coloritem];
-        }
-        
-        if (err) {
-            NSLog(@"Color set moved: %@", err);
         }
     }
     
@@ -2914,7 +2913,7 @@ if (!processing){
                 any = true;
             }
             
-            coloritem = [[NSMenuItem alloc] initWithTitle:[file substringToIndex:[file length] - 4] action:@selector(setColors:) keyEquivalent:@""]; 
+            coloritem = [[NSMenuItem alloc] initWithTitle:[[file lastPathComponent] stringByDeletingPathExtension] action:@selector(setColors:) keyEquivalent:@""];
             [coloritem setTag:2];
             [coloritem setTarget:self];
             [colorsMenu addItem:coloritem];
@@ -2939,6 +2938,7 @@ if (!processing){
     customcolorsMenuItem = coloritem;
     [coloritem setTarget:self];
     [colorsMenu addItem:coloritem];
+    [fm release];
 }
 
 - (void) awakeFromNib
