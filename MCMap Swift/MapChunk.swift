@@ -38,7 +38,7 @@ final class MapChunk {
 	private var onDisk = false
 	
 	/// The texture is totally blank and need not be rendered
-	private var isBlank = false;
+	private(set) var isBlank = false;
 	
 	/// The texture is totally blank and need not be rendered
 	private var blankChecked = false
@@ -50,7 +50,7 @@ final class MapChunk {
 	
 	private let fileName: String
 
-	static var renderSettings: [String] = []
+	var renderSettings: [String] = []
 	/*
 	GLuint texture[6];
 	*/
@@ -60,6 +60,10 @@ final class MapChunk {
 		self.y = y
 		
 		fileName = ((NSTemporaryDirectory() as NSString).appendingPathComponent("MCMap Swift") as NSString).appendingPathComponent("chunk_\(x)_\(y).png")
+	}
+	
+	deinit {
+		deleteAllTextures()
 	}
 	
 	/// Create the NSTask needed to render this block's texture and launch it.
@@ -74,7 +78,7 @@ final class MapChunk {
 			// Tell the task where to find mcmap (it's in the resource folder of the bundle!)
 			renderer.launchPath = Bundle.main.path(forResource: "mcmap", ofType: nil)
 			
-			var theseSettings = MapChunk.renderSettings
+			var theseSettings = renderSettings
 			theseSettings.append("-from")
 			theseSettings.append("\(x)")
 			theseSettings.append("\(y)")
@@ -118,5 +122,89 @@ final class MapChunk {
 		needsRender = true
 		invalid = true // Lets the draw code know to use only VRAM
 					   // (and reset VRAM once the texture is available on disk)
+	}
+	
+	/// Remove all the textures from VRAM
+	func deleteAllTextures() {
+		
+	}
+	
+	func checkRenderer() -> RendererStatus {
+		if needsRender {
+			return .needsRunning
+		} else if renderer != nil {
+			return .running
+		} else {
+			return .done
+		}
+	}
+	
+	/// Delete the textures out of memory and act like a new, unrendered chunk.
+	func reset() {
+		// It's far easier to invalidate the texture before reset, since that code
+		// knows how to deal with the mid-render situations.
+		invalidate()
+		deleteAllTextures()
+		onDisk = false;
+		// isBlank = false; // A blank chunk is forever blank, from any angle, for any reason.
+		// blankChecked = false;
+		renderer = nil
+		needsRender = true
+		invalid = false
+	}
+	
+	func setBlank() {
+		isBlank = true
+		blankChecked = true
+	}
+	
+	/// Returns true if the chunk is visible onscreen and needs to be drawn. If isBlank, then is always false.
+	func isVisible(left: Float, right: Float, top: Float, bottom: Float, zoom: Float) -> Bool {
+		if isBlank {
+			return false
+		}
+		
+		// Perform real checks here eventually
+		return true
+		
+		/*
+		
+		- (BOOL) blockIsVisibleX:(int)bx Y:(int)by
+	{
+		// Check each corner of the block and make sure its screen position
+		float ul[2], ur[2], bl[2], br[2];
+		float zoom = exp(zoom_level);
+		float blocksize = 522;
+		
+		// Screen Edges
+		float left = camera.viewPos.x - (0.5*camera.viewWidth+blocksize)*zoom;
+		float right = camera.viewPos.x + (0.5*camera.viewWidth+blocksize)*zoom;
+		float top = camera.viewPos.y + (0.5*camera.viewHeight+blocksize)*zoom;
+		float bottom = camera.viewPos.y - (0.5*camera.viewHeight+blocksize)*zoom;
+		
+		block2screen(bx,by,ul);
+		block2screen(bx+8,by,ur);
+		block2screen(bx,by+8,bl);
+		block2screen(bx+8,by+8,br);
+		
+		if (ul[0] > left && ul[0] < right && ul[1] > bottom && ul[1] < top)
+			return TRUE;
+		if (ur[0] > left && ur[0] < right && ur[1] > bottom && ur[1] < top)
+			return TRUE;
+		if (bl[0] > left && bl[0] < right && bl[1] > bottom && bl[1] < top)
+			return TRUE;
+		if (br[0] > left && br[0] < right && br[1] > bottom && br[1] < top)
+			return TRUE;
+		return FALSE;
+	}
+		
+		*/
+	}
+	
+	/// Remove the render from disk. This resets `onDisk`.
+	private func deleteOnDisk() {
+		try? FileManager.default.removeItem(atPath: fileName)
+		
+		onDisk = false
 	}
 }
